@@ -24,6 +24,24 @@ export default function UserList() {
 
     const closeCreateUserClickHandler = () => {
         setShowCreate(false);
+    };
+
+    const saveCreateUserClickHandler = async (e) => {
+        // Stop default refresh behaviour
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(e.target);
+        const formValues = Object.fromEntries(formData);
+
+        // create new user on server
+        const newUser = await userService.create(formValues);
+
+        // update local state
+        setUsers(state => [...state, newUser])
+
+        // close modal
+        setShowCreate(false);
     }
 
     return (
@@ -31,7 +49,12 @@ export default function UserList() {
 
             <Search />
 
-            {showCreate && <UserCreate onClose={closeCreateUserClickHandler}/>}
+            {showCreate && (
+                <UserCreate 
+                    onClose={closeCreateUserClickHandler}
+                    onSave={saveCreateUserClickHandler}
+                />)
+            }
 
             <div className="table-wrapper">
                 <div className="overlays">
