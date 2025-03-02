@@ -47,7 +47,7 @@ export default function UserList() {
     }
 
     const userInfoClickHandler = (userId) => {
-
+        setUserIdInfo(userId);
     };
 
     return (

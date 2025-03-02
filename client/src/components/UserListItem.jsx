@@ -8,7 +8,7 @@ export default function UserListItem({
     phoneNumber,
     createdAt,
     imageUrl,
-    onInfoClick
+    onInfoClick,
 }) {
     return (
         <tr>
